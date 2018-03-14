@@ -29,6 +29,14 @@ Then clone this demo's source code from this private repo:
 
     git clone https://github.com/joehahn/stock-picker-source.git
 
+Then uncompress the input data:
+
+    mkdir -p data/private/eoddata/txt
+    for file in data/private/eoddata/zip/*.zip; do
+        unzip $file -d data/private/eoddata/txt
+    done
+    du -sh data/private/eoddata/txt
+
 ### Execute:
 
 Start Jupyter notebook via
