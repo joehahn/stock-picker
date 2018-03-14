@@ -15,7 +15,7 @@ Clone this repo:
     git clone https://github.com/joehahn/stock-picker.git
     cd stock-picker
 
-For setup on OSX:
+Install the following libraries if on OSX:
 
     wget https://repo.continuum.io/miniconda/Miniconda2-latest-MacOSX-x86_64.sh
     chmod +x ./Miniconda2-latest-MacOSX-x86_64.sh
@@ -23,7 +23,11 @@ For setup on OSX:
     ~/miniconda2/bin/conda install -y jupyter
     ~/miniconda2/bin/conda install -y keras
     ~/miniconda2/bin/conda install -y seaborn
-    ~/miniconda2/bin/conda install -y scikit-learn
+    #~/miniconda2/bin/conda install -y scikit-learn
+
+Then clone this demo's source code from this private repo:
+
+    git clone https://github.com/joehahn/stock-picker-source.git
 
 ### Execute:
 
