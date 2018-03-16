@@ -1,4 +1,4 @@
-# stock-picker
+# stock_picker
 
 by Joe Hahn,<br />
 jmh.datasciences@gmail.com,<br />
@@ -12,8 +12,8 @@ tbd...
 
 Clone this repo:
 
-    git clone https://github.com/joehahn/stock-picker.git
-    cd stock-picker
+    git clone https://github.com/joehahn/stock_picker.git
+    cd stock_picker
 
 Install the following libraries if on OSX:
 
@@ -27,15 +27,8 @@ Install the following libraries if on OSX:
 
 Then clone this demo's source code from this private repo:
 
-    git clone https://github.com/joehahn/stock-picker-source.git
+    git clone https://github.com/joehahn/stock_picker_source.git
 
-Then uncompress the input data:
-
-    mkdir -p data/private/eoddata/txt
-    for file in data/private/eoddata/zip/*.zip; do
-        unzip $file -d data/private/eoddata/txt
-    done
-    du -sh data/private/eoddata/txt
 
 ### Execute:
 
