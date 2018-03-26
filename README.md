@@ -42,6 +42,41 @@ in data/selected_tickers.pkl, and a plot is stored in figs/selected_tickers_volu
 
 2 Get openers:
 
+    ./stock_picker_source/get_openers.py
+
+this saves in file data/openers.pkl the opening price and volume for all tickers,
+which are used later to fill data gaps for those tickers that start trading after 2013.
+
+3 Prep historical training data
+
+ipython
+
+start_date = '2013-01-01'
+end_date = '2016-07-01'
+debug = True
+
+#read list of preferred tickers
+import pickle
+file = 'data/selected_tickers.pkl'
+with open(file) as f:
+    tickers = pickle.load(f)
+if (debug):
+    print 'number of preferred tickers = ', len(tickers)
+
+#get each ticker's opener
+file = 'data/openers.pkl'
+with open(file) as f:
+    openers = pickle.load(f)
+if (debug):
+    print openers.head()
+
+#
+from stock_picker_source.helper_fns import *
+market = prep_xy(start_date, end_date, tickers, openers, debug=False)
+
+3 Train model on historical data
+
+4 Loop over successive dates and predict+train
 
 
 
