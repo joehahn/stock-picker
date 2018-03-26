@@ -32,11 +32,8 @@ Then clone this demo's source code from this private repo:
 
 ### Execute:
 
-Start Jupyter notebook via
+1 The following selects the tickers that will be modeled:
 
-    jupyter notebook
+    ./stock_picker_source/select_tickers.py
 
-and load the hivemind.ipynb notebook then click Kernel > Run All
 
-### Then:
-...
