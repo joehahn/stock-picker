@@ -36,4 +36,8 @@ Then clone this demo's source code from this private repo:
 
     ./stock_picker_source/select_tickers.py
 
+this reads the 2017 NYSE data and selects the top 509 tickers (out of 3131 possible tickers)
+that are responsible for 80% of the market's dollar-volume. Those tickers are stored
+in data/selected_tickers.pkl, and a plot is stored in figs/selected_tickers_volume.png .
+
 
