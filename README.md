@@ -45,10 +45,11 @@ stored in figs/selected_tickers_volume.png .
 
 2 Get openers:
 
-    ./stock_picker_source/get_openers.py
+    ./get_openers.py
 
-this saves in file data/openers.pkl the opening price and volume for all tickers,
-which are used later to fill data gaps for those tickers that start trading after 2013.
+which saves in file data/openers.pkl the opening price and volume for all tickers,
+which are used later to fill data gaps for those tickers that might have started trading
+after 2013.
 
 3 Prep historical training data
 

@@ -12,7 +12,7 @@
 #    ./select_tickers.py
 
 #set input parameters...this selects the 509 most-dollar-traded tickers of 2017, out of 3131 tickers
-dollar_volume_fraction = 0.05#0.8
+dollar_volume_fraction = 0.8
 start_date = '2017-01-01'
 end_date = '2018-01-01'
 path = 'data/private/eoddata/NYSE_2017.zip'

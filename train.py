@@ -14,6 +14,7 @@
 #set input parameters
 start_date = '2013-01-01'
 end_date = '2016-07-01'
+top_k = 0.90
 debug = True
 
 #read list of preferred tickers
@@ -33,7 +34,7 @@ if (debug):
 
 #read and prep NYSE data
 from stock_picker_source.helper_fns import *
-xy, xcols, ycol = prep_xy(start_date, end_date, tickers, openers, debug=debug)
+xy, xcols, ycol = prep_xy(start_date, end_date, tickers, openers, top_k, debug=debug)
 
 #extract the x features
 cols = []
@@ -47,7 +48,8 @@ if (debug):
     print x.head()
     print 'x.shape = ', x.shape
     print 'x_array.shape = ', x_array.shape
-    print [col for col in x.columns if ('_GE' in col)]
+    GE_cols = [col for col in x.columns if ('_GE' in col)]
+    print x[GE_cols].head()
 
 #extract the target variables y
 cols = []
@@ -61,7 +63,8 @@ if (debug):
     print y.head()
     print 'y.shape = ', y.shape
     print 'y_array.shape = ', y_array.shape
-    print [col for col in y.columns if ('_GE' in col)]
+    GE_cols = [col for col in y.columns if ('_GE' in col)]
+    print y[GE_cols].head()
 
 #test-train-validation split is 1:1:1
 train_fraction = 0.333
@@ -85,16 +88,16 @@ sns.set(font_scale=1.5)
 #build MLP classification model 
 N_inputs = x.shape[1]
 N_outputs = y.shape[1]
-N_middle = N_inputs
+N_middle = (N_inputs + N_outputs)/2
 layers = [N_inputs, N_middle, N_outputs]
-dropout_fraction = 0.25
+dropout_fraction = 0.3
 print 'layers = ', layers
 print 'dropout_fraction = ', dropout_fraction
 model = mlp_classifier(layers, dropout_fraction=dropout_fraction)
 model.summary()
 
 #fit model
-N_epochs = 21
+N_epochs = 51
 batch_size = 100
 model = mlp_classifier(layers, dropout_fraction=dropout_fraction)
 fit_history = model.fit(x_train, y_train, batch_size=batch_size, epochs=N_epochs, verbose=1, 
@@ -102,14 +105,15 @@ fit_history = model.fit(x_train, y_train, batch_size=batch_size, epochs=N_epochs
 
 #plot loss vs training epoch
 fig, ax = plt.subplots(1,1, figsize=(15, 6))
-xp = fit_history.epoch#[1:]
-yp = fit_history.history['loss']#[1:]
+xp = fit_history.epoch[10:]
+yp = fit_history.history['loss'][10:]
 p = ax.plot(xp, yp, linewidth=1, label='training sample')
-yp = fit_history.history['val_loss']#[1:]
+yp = fit_history.history['val_loss'][10:]
 p = ax.plot(xp, yp, linewidth=1, label='validation sample')
 p = ax.set_title('loss function versus training epoch')
 p = ax.set_ylabel('loss function')
 p = ax.set_xlabel('training epoch')
-p = ax.set_yscale('log')
+#p = ax.set_yscale('log')
+p = ax.set_ylim(0, 20)
 p = ax.legend()
 plt.savefig('figs/training_loss.png')
