@@ -77,14 +77,39 @@ print x_train.shape, y_train.shape
 print x_test.shape, y_test.shape
 print x_validate.shape, y_validate.shape
 
+#plotting imports
+import matplotlib.pyplot as plt
+import seaborn as sns
+sns.set(font_scale=1.5)
+
 #build MLP classification model 
 N_inputs = x.shape[1]
 N_outputs = y.shape[1]
 N_middle = N_inputs
 layers = [N_inputs, N_middle, N_outputs]
-dropout_fraction = 0.5
+dropout_fraction = 0.25
 print 'layers = ', layers
 print 'dropout_fraction = ', dropout_fraction
 model = mlp_classifier(layers, dropout_fraction=dropout_fraction)
 model.summary()
 
+#fit model
+N_epochs = 21
+batch_size = 100
+model = mlp_classifier(layers, dropout_fraction=dropout_fraction)
+fit_history = model.fit(x_train, y_train, batch_size=batch_size, epochs=N_epochs, verbose=1, 
+    validation_data=(x_validate, y_validate))
+
+#plot loss vs training epoch
+fig, ax = plt.subplots(1,1, figsize=(15, 6))
+xp = fit_history.epoch#[1:]
+yp = fit_history.history['loss']#[1:]
+p = ax.plot(xp, yp, linewidth=1, label='training sample')
+yp = fit_history.history['val_loss']#[1:]
+p = ax.plot(xp, yp, linewidth=1, label='validation sample')
+p = ax.set_title('loss function versus training epoch')
+p = ax.set_ylabel('loss function')
+p = ax.set_xlabel('training epoch')
+p = ax.set_yscale('log')
+p = ax.legend()
+plt.savefig('figs/training_loss.png')
