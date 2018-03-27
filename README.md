@@ -23,7 +23,7 @@ Install the following libraries if on OSX:
     ~/miniconda2/bin/conda install -y jupyter
     ~/miniconda2/bin/conda install -y keras
     ~/miniconda2/bin/conda install -y seaborn
-    #~/miniconda2/bin/conda install -y scikit-learn
+    ~/miniconda2/bin/conda install -y scikit-learn
 
 Then clone this demo's source code from this private repo:
 
@@ -48,31 +48,6 @@ this saves in file data/openers.pkl the opening price and volume for all tickers
 which are used later to fill data gaps for those tickers that start trading after 2013.
 
 3 Prep historical training data
-
-ipython
-
-start_date = '2013-01-01'
-end_date = '2016-07-01'
-debug = True
-
-#read list of preferred tickers
-import pickle
-file = 'data/selected_tickers.pkl'
-with open(file) as f:
-    tickers = pickle.load(f)
-if (debug):
-    print 'number of preferred tickers = ', len(tickers)
-
-#get each ticker's opener
-file = 'data/openers.pkl'
-with open(file) as f:
-    openers = pickle.load(f)
-if (debug):
-    print openers.head()
-
-#
-from stock_picker_source.helper_fns import *
-market = prep_xy(start_date, end_date, tickers, openers, debug=False)
 
 3 Train model on historical data
 
