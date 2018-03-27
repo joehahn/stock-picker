@@ -34,11 +34,14 @@ Then clone this demo's source code from this private repo:
 
 1 The following selects the tickers that will be modeled:
 
-    ./stock_picker_source/select_tickers.py
+    ./select_tickers.py
 
 this reads the 2017 NYSE data and selects the top 509 tickers (out of 3131 possible tickers)
-that are responsible for 80% of the market's dollar-volume. Those tickers are stored
-in data/selected_tickers.pkl, and a plot is stored in figs/selected_tickers_volume.png .
+responsible for 80% of the market's dollar-volume. This demo assumes that most of the signal
+in the market data resides in the most-traded tickers, and so the remainder of
+this demo will focus on the top %16 of tickers that drive %80 of the market value.
+A list of those tickers is stored in data/selected_tickers.pkl, with a plot also getting
+stored in figs/selected_tickers_volume.png .
 
 2 Get openers:
 
