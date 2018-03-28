@@ -39,11 +39,11 @@ Then clone this demo's source code from this private repo:
 this reads the 2017 NYSE data and selects the top 509 tickers (out of 3131 possible tickers)
 responsible for 80% of the market's dollar-volume. This demo assumes that most of the signal
 in the market data resides in the most-traded tickers, and so the remainder of
-this demo will focus on the top %16 of tickers that drive %80 of the market value.
+this demo will focus on the top %16 of tickers that drive %80 of the market's dollar-volume.
 A list of those tickers is stored in data/selected_tickers.pkl, with a plot also getting
 stored in figs/selected_tickers_volume.png .
 
-2 Get openers:
+2 Get openers (drop this step):
 
     ./get_openers.py
 
@@ -51,9 +51,9 @@ which saves in file data/openers.pkl the opening price and volume for all ticker
 which are used later to fill data gaps for those tickers that might have started trading
 after 2013.
 
-3 Prep historical training data
-
 3 Train model on historical data
+
+    ./train.py
 
 4 Loop over successive dates and predict+train
 
