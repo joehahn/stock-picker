@@ -34,7 +34,7 @@ if (debug):
 
 #read and prep NYSE data
 from stock_picker_source.helper_fns import *
-xy, xcols, ycols = prep_xy(start_date, end_date, tickers, openers, debug=debug)
+xy, xcols, ycols = prep_xy(start_date, end_date, tickers, openers, top_k, debug=debug)
 
 #extract the x features
 x = xy[xcols]
@@ -88,7 +88,7 @@ N_outputs = y.shape[1]
 N_middle = N_inputs/2
 #N_middle = np.int(np.sqrt(N_inputs).round())
 layers = [N_inputs, N_middle, N_outputs]
-dropout_fraction = 0.01
+dropout_fraction = 0.3
 print 'layers = ', layers
 print 'dropout_fraction = ', dropout_fraction
 model = mlp_classifier(layers, dropout_fraction=dropout_fraction)
