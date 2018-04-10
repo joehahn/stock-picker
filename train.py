@@ -85,35 +85,39 @@ sns.set(font_scale=1.5)
 #build MLP classification model 
 N_inputs = x.shape[1]
 N_outputs = y.shape[1]
-N_middle = N_inputs/2
-#N_middle = np.int(np.sqrt(N_inputs).round())
+#N_middle = N_inputs/2
+N_middle = np.int(np.sqrt(N_inputs).round())
 layers = [N_inputs, N_middle, N_outputs]
-dropout_fraction = 0.3
+dropout_fraction = 0.7
 print 'layers = ', layers
 print 'dropout_fraction = ', dropout_fraction
 model = mlp_classifier(layers, dropout_fraction=dropout_fraction)
 model.summary()
 
 #fit model
-N_epochs = 21
-batch_size = 75
+N_epochs = 151
+batch_size = 100
 model = mlp_classifier(layers, dropout_fraction=dropout_fraction)
 fit_history = model.fit(x_train, y_train, batch_size=batch_size, epochs=N_epochs, verbose=1, 
     validation_data=(x_validate, y_validate))
 
 #plot loss vs training epoch
-fig, ax = plt.subplots(1,1, figsize=(15, 6))
-xp = fit_history.epoch[1:]
-yp = fit_history.history['loss'][1:]
+idx = 50
+fig, ax = plt.subplots(1,1, figsize=(10, 5))
+xp = fit_history.epoch[idx:]
+yp = fit_history.history['loss'][idx:]
 p = ax.plot(xp, yp, linewidth=1, label='training sample')
-yp = fit_history.history['val_loss'][1:]
+yp = fit_history.history['val_loss'][idx:]
 p = ax.plot(xp, yp, linewidth=1, label='validation sample')
 p = ax.set_title('loss function versus training epoch')
 p = ax.set_ylabel('loss function')
 p = ax.set_xlabel('training epoch')
 p = ax.legend()
 plt.savefig('figs/training_loss.png')
+plt.show()
 
 #save model
 
 #save scaler
+
+#test against yesterday's top_k
